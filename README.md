@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/banner.png" alt="TokenFinOps — AI Cost Optimizer Gateway" width="100%" />
+  <img src="docs/images/banner.png?v=2" alt="TokenFinOps — AI Cost Optimizer Gateway" width="100%" />
 </p>
 
 <h1 align="center">TokenFinOps</h1>
