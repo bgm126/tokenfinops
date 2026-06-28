@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TokenFinOps Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="sidebar">
+        <div class="brand">
+            <span class="logo-icon">✦</span> TokenFinOps
+        </div>
+        <nav>
+            <a href="#" class="nav-item active" data-tab="overview">Overview</a>
+            <a href="#" class="nav-item" data-tab="requests">Requests Log</a>
+            <a href="#" class="nav-item" data-tab="budgets">Budgets & Quotas</a>
+            <a href="#" class="nav-item" data-tab="recommendations">Savings Recommendations</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>AI Cost Optimization Overview</h1>
+            <div class="header-actions">
+                <span class="status-indicator online">System Online</span>
+            </div>
+        </header>
+
+        <!-- Tab: Overview -->
+        <div id="tab-overview" class="tab-pane active">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-title">Total API Spend</div>
+                    <div class="kpi-value" id="kpi-spend">$0.00</div>
+                    <div class="kpi-subtext">Last 7 days</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Estimated Savings</div>
+                    <div class="kpi-value savings" id="kpi-savings">$0.00</div>
+                    <div class="kpi-subtext">From cache + router</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Semantic Cache Hit Rate</div>
+                    <div class="kpi-value" id="kpi-cache-rate">0.0%</div>
+                    <div class="kpi-subtext">Cosine similarity > 0.95</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Avg Latency</div>
+                    <div class="kpi-value" id="kpi-latency">0ms</div>
+                    <div class="kpi-subtext">Total processing duration</div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Spend Trend</h3>
+                    <canvas id="chart-spend"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Model Allocation (Spend)</h3>
+                    <canvas id="chart-models"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Requests -->
+        <div id="tab-requests" class="tab-pane">
+            <div class="card">
+                <h3>Recent Transaction Log</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Requested</th>
+                                <th>Routed Model</th>
+                                <th>Provider</th>
+                                <th>Tokens</th>
+                                <th>Cost</th>
+                                <th>Latency</th>
+                                <th>Cache</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requests-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Budgets -->
+        <div id="tab-budgets" class="tab-pane">
+            <div class="card">
+                <h3>Team Budgets & Quota Enforcements</h3>
+                <div class="budget-list" id="budget-list-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Recommendations -->
+        <div id="tab-recommendations" class="tab-pane">
+            <div class="card">
+                <h3>Active Optimization Recommendations</h3>
+                <div class="rec-list" id="rec-list-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

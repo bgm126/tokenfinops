@@ -1,0 +1,75 @@
+# Model catalog — add/remove models based on what you have access to
+models:
+  gpt-4o:
+    provider: openai
+    capabilities: [coding, reasoning, medical, creative]
+    quality_tier: premium
+    cost_per_1k_input: 0.005
+    cost_per_1k_output: 0.015
+    context_window: 128000
+    enabled: true
+
+  gpt-4o-mini:
+    provider: openai
+    capabilities: [classification, translation, summarization, general]
+    quality_tier: economy
+    cost_per_1k_input: 0.00015
+    cost_per_1k_output: 0.0006
+    context_window: 128000
+    enabled: true
+
+  claude-3-5-sonnet:
+    provider: anthropic
+    capabilities: [coding, reasoning, creative, analysis]
+    quality_tier: premium
+    cost_per_1k_input: 0.003
+    cost_per_1k_output: 0.015
+    context_window: 200000
+    enabled: true
+
+  gemini-1.5-pro:
+    provider: gemini
+    capabilities: [reasoning, analysis, general]
+    quality_tier: premium
+    cost_per_1k_input: 0.0035
+    cost_per_1k_output: 0.0105
+    context_window: 1048576
+    enabled: true
+
+  gemini-1.5-flash:
+    provider: gemini
+    capabilities: [classification, translation, summarization, general]
+    quality_tier: economy
+    cost_per_1k_input: 0.000375
+    cost_per_1k_output: 0.001125
+    context_window: 1048576
+    enabled: true
+
+  llama3:8b:
+    provider: ollama
+    capabilities: [classification, translation, summarization, general]
+    quality_tier: economy
+    cost_per_1k_input: 0.0    # Free (self-hosted local)
+    cost_per_1k_output: 0.0
+    context_window: 8192
+    enabled: true
+
+  mistral:7b:
+    provider: ollama
+    capabilities: [classification, translation, general]
+    quality_tier: economy
+    cost_per_1k_input: 0.0
+    cost_per_1k_output: 0.0
+    context_window: 8192
+    enabled: true
+
+# Routing rules
+routing:
+  default_strategy: balanced
+  fallback_chain: [ollama, openai, gemini, anthropic]  # Order of failover/fallback
+  task_routing:
+    coding: [claude-3-5-sonnet, gpt-4o]
+    classification: [llama3:8b, gpt-4o-mini, gemini-1.5-flash]
+    translation: [llama3:8b, gemini-1.5-flash, gpt-4o-mini]
+    general: [llama3:8b, gpt-4o-mini, gemini-1.5-flash, claude-3-5-sonnet]
+    reasoning: [claude-3-5-sonnet, gpt-4o, gemini-1.5-pro]

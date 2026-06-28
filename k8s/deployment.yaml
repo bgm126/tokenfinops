@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tokenfinops-app
+  namespace: default
+  labels:
+    app: tokenfinops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tokenfinops
+  template:
+    metadata:
+      labels:
+        app: tokenfinops
+    spec:
+      containers:
+        - name: tokenfinops-gateway
+          image: tokenfinops-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: tokenfinops-config
+          resources:
+            limits:
+              cpu: "1.0"
+              memory: 1024Mi
+            requests:
+              cpu: "0.5"
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20

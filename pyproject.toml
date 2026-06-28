@@ -1,0 +1,56 @@
+[project]
+name = "tokenfinops"
+version = "0.1.0"
+description = "An open-ended, self-hostable AI Cost Optimization gateway and pipeline."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "Venkatesh", email = "venkatesh@example.com" }
+]
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.1",
+    "pydantic>=2.7.4",
+    "pydantic-settings>=2.3.4",
+    "httpx>=0.27.0",
+    "sqlalchemy[asyncio]>=2.0.31",
+    "asyncpg>=0.29.0",
+    "alembic>=1.13.1",
+    "redis[hiredis]>=5.0.6",
+    "tiktoken>=0.7.0",
+    "tokenizers>=0.19.1",
+    "faiss-cpu>=1.8.0.post1",
+    "pyyaml>=6.0.1",
+    "prometheus-client>=0.20.0",
+    "opentelemetry-api>=1.25.0",
+    "opentelemetry-sdk>=1.25.0",
+    "opentelemetry-instrumentation-fastapi>=0.46b0",
+    "numpy>=1.26.4",
+]
+
+[project.optional-dependencies]
+local-embeddings = [
+    "sentence-transformers>=3.0.1",
+]
+all = [
+    "tokenfinops[local-embeddings]",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tokenfinops"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "ARG"]
+ignore = ["B008"]

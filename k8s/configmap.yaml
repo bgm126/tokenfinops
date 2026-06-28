@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tokenfinops-config
+  namespace: default
+data:
+  DATABASE_URL: "postgresql+asyncpg://tokenfinops:tokenfinops@postgres:5432/tokenfinops"
+  REDIS_URL: "redis://redis:6379/0"
+  EMBEDDING_PROVIDER: "sentence-transformers"
+  EMBEDDING_MODEL: "all-MiniLM-L6-v2"
+  ENABLE_SEMANTIC_CACHE: "true"
+  ENABLE_PROMPT_OPTIMIZATION: "true"
+  ENABLE_MODEL_ROUTING: "true"
+  ENABLE_BUDGET_ENFORCEMENT: "true"
+  OLLAMA_BASE_URL: "http://ollama-service:11434"
